@@ -1,4 +1,3 @@
-# Input processes
 processes = [
     {"pid": 1, "arrival": 0, "burst": 5},
     {"pid": 2, "arrival": 1, "burst": 3},
