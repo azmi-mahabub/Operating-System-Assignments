@@ -13,6 +13,8 @@ i = 0
 CT = []
 WT = []
 TAT = []
+total_TAT = 0
+total_WT = 0
 
 while(len(lis2) < n ):
     
@@ -30,4 +32,16 @@ while(len(lis2) < n ):
   x.remove(lis[i])
   lis.clear()
 
-print(lis2, CT, TAT, WT)
+for j in range(len(lis2)):
+  total_TAT += TAT[j]
+  total_WT += WT[j]
+print('Average of Turn Around Time = ', total_TAT/n)
+print('Average of Waiting Time = ', total_WT/n)
+
+for k in range(len(lis2)):
+    lis2[k]['CT'] = CT[k]
+    lis2[k]['TAT'] = TAT[k]
+    lis2[k]['WT'] = WT[k]
+lis2.sort(key=lambda x: x['pid'])
+for j in lis2:
+  print(j)
