@@ -1,0 +1,24 @@
+req_s = input("Enter numbers: ")
+req_s = list(map(int, req_s.split()))
+head = int(input("Enter head: "))
+visited = [False] * len(req_s)
+seek_sequence = []
+seek_time = 0
+current = head
+
+for _ in range(len(req_s)):
+    nearest_index = -1
+    min_dist = float('inf')
+    for i in range(len(req_s)):
+        if not visited[i]:
+            distance = abs(req_s[i] - current)
+            if distance < min_dist:
+                min_dist = distance
+                nearest_index = i
+    visited[nearest_index] = True
+    seek_sequence.append(req_s[nearest_index])
+    seek_time += min_dist
+    current = req_s[nearest_index]
+
+print("Seek Sequence:", seek_sequence)
+print("Total Seek Time:", seek_time)
