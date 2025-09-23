@@ -1,0 +1,53 @@
+#P1 ---- 0 ---- 6
+#P2 ---- 1 ---- 8
+#P3 ---- 2 ---- 7
+#P4 ---- 3 ---- 3
+m = int (input("Enter number of Processes: "))
+x = []
+
+for i in range(1, m+1):
+  arrival = int(input(f"Enter arrival time for P{i}: "))
+  burst = int(input(f"Enter burst time for P{i}: "))
+
+  x.append({"pid": i, "arrival": arrival, "burst": burst})
+print("\nProcesses data:")
+for p in x:
+  print(p)
+
+n = len(x)
+total_TAT =0
+total_WT = 0
+sum = 0
+i=0
+lis = []
+CT = []
+TAT = []
+WT = []
+
+while(len(lis)<n):
+  x.sort(key=lambda x: (x["arrival"], x["burst"]))
+  lis2 = []
+  for j in x:
+    if j['arrival']<=sum:
+      lis2.append(j)
+    lis2.sort(key=lambda x: x["burst"])
+
+  sum += lis2[i]['burst']
+  CT.append(sum)
+  TAT.append(sum-lis2[i]['arrival'])
+  WT.append(sum-lis2[i]['arrival'] - lis2[i]['burst'])
+  x.remove(lis2[i])
+  lis.append(lis2[i])
+
+for j in range(len(lis)):
+  total_TAT += TAT[j]
+  total_WT += WT[j]
+print('Average of Turn Around Time = ', total_TAT/n)
+print('Average of Waiting Time = ', total_WT/n)
+
+for k in range(len(lis)):
+    lis[k]['CT'] = CT[k]
+    lis[k]['TAT'] = TAT[k]
+    lis[k]['WT'] = WT[k]
+
+print(lis)
